@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy The Assistant to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/lulu-personal-os-app-v1k9wj]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -26,15 +27,9 @@ jobs:
 
       - run: npm run build
         env:
-          VITE_BASE: /road-heaven/
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_VAPID_PUBLIC_KEY: ${{ secrets.VITE_VAPID_PUBLIC_KEY }}
-          VITE_GOOGLE_MAPS_KEY: ${{ secrets.VITE_GOOGLE_MAPS_KEY }}
-          VITE_GOOGLE_MAPS_EMBED_ONLY: ${{ secrets.VITE_GOOGLE_MAPS_EMBED_ONLY }}
+          VITE_BASE: /Nizar-assistant-/
 
-      # Publish dist/ to the gh-pages branch — GitHub serves it via Pages
-      # without needing the Pages-admin API the default token lacks.
+      # Publish dist/ to the gh-pages branch — GitHub Pages serves it from there.
       - name: Deploy to gh-pages branch
         run: |
           touch dist/.nojekyll
