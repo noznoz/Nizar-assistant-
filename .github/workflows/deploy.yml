@@ -1,9 +1,8 @@
-name: Deploy Lulu to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, claude/lulu-personal-os-app-v1k9wj]
-  workflow_dispatch:
+    branches: [main]
 
 permissions:
   contents: write
@@ -27,9 +26,15 @@ jobs:
 
       - run: npm run build
         env:
-          VITE_BASE: /Nizar-assistant-/
+          VITE_BASE: /road-heaven/
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_VAPID_PUBLIC_KEY: ${{ secrets.VITE_VAPID_PUBLIC_KEY }}
+          VITE_GOOGLE_MAPS_KEY: ${{ secrets.VITE_GOOGLE_MAPS_KEY }}
+          VITE_GOOGLE_MAPS_EMBED_ONLY: ${{ secrets.VITE_GOOGLE_MAPS_EMBED_ONLY }}
 
-      # Publish dist/ to the gh-pages branch — GitHub Pages serves it from there.
+      # Publish dist/ to the gh-pages branch — GitHub serves it via Pages
+      # without needing the Pages-admin API the default token lacks.
       - name: Deploy to gh-pages branch
         run: |
           touch dist/.nojekyll
