@@ -38,6 +38,7 @@ const GROUPS = [
   },
   {
     key: 'grpHome', tint: 't-ok', items: [
+      { id: 'garage', icon: 'car', collection: 'vehicles' },
       { id: 'properties', icon: 'doc', collection: 'properties' },
       { id: 'valuables', icon: 'gift', collection: 'valuables' },
       { id: 'memberships', icon: 'wallet', collection: 'memberships' },
